@@ -21,10 +21,6 @@ class kexnews2Spider(scrapy.Spider):
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
-        print('gsdebug: step 2!!!!!!!')
-        print('gsdebug: year: ' + self.date[0:4])
-        print('gsdebug: m: ' + self.date[4:6])
-        print('gsdebug: d: ' + self.date[6:8])
         yield scrapy.FormRequest(
             response.request.url,
             formdata={
@@ -43,30 +39,10 @@ class kexnews2Spider(scrapy.Spider):
         )
 
     def parse_results(self, response):
-        print('gsdebug: step 3!!!!!!!, response size:' + str(len(response.body)))
-        ########### test1
-        # for quote in response.css("div.quote"):
-        #     yield {
-        #         'quote': quote.css('span.content ::text').extract_first(),
-        #         'author': quote.css('span.author ::text').extract_first(),
-        #         'tag': quote.css('span.tag ::text').extract_first(),
-        #     }
-        #page = response.url.split("/")[-2]
-        #filename = 'sc-%s.html' % page
-
-        ########### test2
-        # filename = 'sc.html'
-        # with open(filename, 'wb') as f:
-        #     f.write(response.body)
-        # self.log('Saved file %s' % filename)
-
-        ########### test3
         records = response.xpath('//*[@id="mutualmarket-result"]/tbody/tr[*]')
-        print('gsdebug: step 3!!!!!!!, records size:' + str(len(records)))
 
         for i in records:
             item = ShanghaiStock()
-            # result = i.xpath('td/text()').extract()
             result = i.xpath('td[*]/div[@class="mobile-list-body"]/text()').extract()
             result = list(map(str.strip, result))
             if len(result)==3:
