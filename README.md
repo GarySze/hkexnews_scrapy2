@@ -6,9 +6,9 @@ This project is based on: https://github.com/KennethYCK/hkexnews_scrapy and with
 * Command line to run the scrapy is 
    ```python
   scacpy runspider ...
-  instead of
    ```
+  instead of   
    ```python
-  scrapy crawl 
+  scrapy crawl ...
    ```
 Please refer to https://github.com/KennethYCK/hkexnews_scrapy for more detail.
