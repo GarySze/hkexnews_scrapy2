@@ -1,7 +1,15 @@
 import scrapy
 import datetime
 
-from hkexnews_scrapy2.items import ShanghaiStock
+#from hkexnews_scrapy2.items import ShanghaiStock
+
+class ShanghaiStock(scrapy.Item):
+    date = scrapy.Field()
+    code = scrapy.Field()
+    stock_cname = scrapy.Field()
+    stock_ename = scrapy.Field()
+    share_holding = scrapy.Field()
+    percent = scrapy.Field()
 
 class kexnews2Spider(scrapy.Spider):
     name = "hkexnews2"
